@@ -228,6 +228,8 @@ function parseSets(str)
   return sets;
 }
 
+// Remove this for use outside of nodejs
+
 module.exports = {
   statTemplate: statTemplate,
   setTemplate: setTemplate,

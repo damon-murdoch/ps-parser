@@ -1,5 +1,7 @@
+// Import the js parser script
 const parser = require('./parser.js');
 
+// Test string containing a pokemon team
 const test_set = `
 Arahpthos (Salamence-Mega) (M) @ Salamencite  
 Ability: Aerilate  
@@ -58,7 +60,7 @@ IVs: 0 Atk / 30 Def
 - Hidden Power [Ice]  
 - Protect  
 
-MalcolmIsBad (Amoonguss) (f) @ Mental Herb  
+Mogarchu (Amoonguss) @ Mental Herb  
 Ability: Regenerator  
 Level: 50  
 Shiny: Yes  
@@ -71,5 +73,8 @@ IVs: 0 Atk / 0 Spe
 - Clear Smog
 `
 
+// Pass the team string through the parser
 let sets = parser.parseSets(test_set);
+
+// Write the output to the terminal
 console.log(sets);
