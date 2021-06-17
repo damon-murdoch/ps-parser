@@ -119,7 +119,7 @@ function parseSets(str)
       }
       
       // If set is female
-      else if (line.includes('(f)'))
+      else if (line.toLowerCase().includes('(f)'))
       {
         // Remove gender from the line
         line = line.replace('(f)','').replace('(F)','');
