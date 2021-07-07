@@ -14,14 +14,15 @@ A list of future planned changes are listed below.
 | C/C++ Implementation      | Medium   |
 
 ## Changelog
-### 1.0 Initial Build
-#### Added JavaScript Implementation
+### 1.0 - (2021-06-17) - JavaScript Build
+- Added JavaScript Implementation
 
-### 2.0 Second Update
-#### Added Python Implementation
+### 2.0 - (2021-07-07) - Python Build
+- Added Python Implementation
+- Fixed bugs in JavaScript Implementation
 
-### 2.1 Bug Patch
-#### Fixed stat parsing issues
+### 2.1 - (2021-07-07) - Bug Fix Patch
+- Fixed stat parsing issues (both languages)
 
 ### Problems or improvements
 If you have any suggested fixes or improvements for this project, please 
