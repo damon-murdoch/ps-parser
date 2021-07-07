@@ -42,6 +42,9 @@ function setTemplate()
   }
 }
 
+// parseStats(stats: object, str: string): object
+// Given an existing stats object and a string containing stats, 
+// Parses the string and returns a new stats object containing the fields
 function parseStats(stats, str)
 {
   // Split on the seperator
@@ -143,7 +146,7 @@ function parseSets(str)
         // Add the species to the object
         current.species = li[0].trim();
 
-        // Remove the first two objects (nickname + '(')
+        // Remove the first two objects (species + ')')
         li.splice(0, 2);
 
         // Join the split back together again
@@ -166,7 +169,7 @@ function parseSets(str)
         // If the second index is not null
         if (li[1].trim() !== '')
         {
-          // Set the item to the value of the s econd index
+          // Set the item to the value of the second index
           current.item = li[1].trim();
         }
       }
