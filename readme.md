@@ -10,7 +10,18 @@ A list of future planned changes are listed below.
 
 | Change Description        | Priority |
 | ------------------------- | -------- | 
-| Add Python Implementation | High     |
+| Java Implementation       | Medium   |
+| C/C++ Implementation      | Medium   |
+
+## Changelog
+1.0 Initial Build
+- Added JavaScript Implementation
+
+2.0 Second Update
+- Added Python Implementation
+
+2.1 Bug Patch
+- Fixed stat parsing issues
 
 ### Problems or improvements
 If you have any suggested fixes or improvements for this project, please 
