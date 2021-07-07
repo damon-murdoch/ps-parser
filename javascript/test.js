@@ -73,8 +73,14 @@ IVs: 0 Atk / 0 Spe
 - Clear Smog
 `
 
+// Get the starting time
+console.time('execution');
+
 // Pass the team string through the parser
 let sets = parser.parseSets(test_set);
+
+// Get the ending time
+console.timeEnd('execution');
 
 // Write the output to the terminal
 console.log(sets);

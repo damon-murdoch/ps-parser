@@ -1,6 +1,9 @@
 # Import the parser python script
 import set_parser as parser
 
+# Library for testing execution time
+import timeit
+
 # Test string containing a pokemon team
 test_set = """
 Arahpthos (Salamence-Mega) (M) @ Salamencite  
@@ -73,8 +76,17 @@ IVs: 0 Atk / 0 Spe
 - Clear Smog
 """
 
+# Get the starting time
+start = timeit.default_timer()
+
 # Run the parser on the set
 sets = parser.parse_sets(test_set)
 
+# Get the ending time
+stop = timeit.default_timer()
+
 # Write the output to the terminal
 print(sets)
+
+# Print the time taken to the terminal
+print("Time:", stop - start,"seconds.")

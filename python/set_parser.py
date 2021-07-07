@@ -55,10 +55,10 @@ def parse_stats(stats, str):
   for stat in s:
 
     # Split the stat on the space
-    st = stat.split(' ')
+    st = stat.strip().split(' ')
 
     # Switch on the stat
-    match st:
+    match st[1].lower():
 
       case "hp": 
         stats['hp'] = int(st[0])

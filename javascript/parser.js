@@ -54,17 +54,31 @@ function parseStats(stats, str)
   for (stat of s)
   {
     // Split the stat on the space
-    st = stat.split(' ');
+    st = stat.trim().split(' ');
+
+    console.log(st)
 
     // Switch on the stat
     switch(st[1].toLowerCase())
     {
-      case 'hp': stats.hp = parseInt(st[0]);
-      case 'atk': stats.atk = parseInt(st[0]);
-      case 'def': stats.def = parseInt(st[0]);
-      case 'spa': stats.spa = parseInt(st[0]);
-      case 'spd': stats.spd = parseInt(st[0]);
-      case 'spe': stats.spe = parseInt(st[0]);
+      case 'hp': 
+        stats.hp = parseInt(st[0]);
+      break;
+      case 'atk': 
+        stats.atk = parseInt(st[0]);
+      break;
+      case 'def': 
+        stats.def = parseInt(st[0]);
+      break;
+      case 'spa': 
+        stats.spa = parseInt(st[0]);
+      break;
+      case 'spd': 
+        stats.spd = parseInt(st[0]);
+      break;
+      case 'spe': 
+        stats.spe = parseInt(st[0]);
+      break;
     }
   }
 
