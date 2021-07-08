@@ -56,8 +56,6 @@ function parseStats(stats, str)
     // Split the stat on the space
     st = stat.trim().split(' ');
 
-    console.log(st)
-
     // Switch on the stat
     switch(st[1].toLowerCase())
     {
@@ -95,10 +93,10 @@ function parseSets(str)
   // Empty array of sets
   let sets = [];
 
-  // Get a new set template
+  // Current set null by default
   let current = null;
 
-  // Loop over each line in the string (lowercase)
+  // Loop over each line in the string
   for(let line of str.split('\n'))
   {
     // Series of increasingly obscure cases 
@@ -131,7 +129,7 @@ function parseSets(str)
         // Remove gender from the line
         line = line.replace('(m)','').replace('(M)','');
 
-        // Set set gender to male
+        // Set gender to male
         current.gender = 'm'; 
       }
       
