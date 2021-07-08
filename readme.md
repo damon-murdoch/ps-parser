@@ -14,19 +14,19 @@ A list of future planned changes are listed below.
 | C/C++ Implementation      | Medium   |
 
 ## Changelog
-### 1.0 - JavaScript Build (2021-06-17)
-- Added JavaScript Implementation
+### 3.1 - Powershell Build (2021-07-08) (Current Build)
+- Added PowerShell Implementation
+- Fixed bugs in JavaScript Implementation
+
+### 2.1 - Bug Fix Patch (2021-07-07)
+- Fixed stat parsing issues (both languages
 
 ### 2.0 - Python Build (2021-07-07)
 - Added Python Implementation
 - Fixed bugs in JavaScript Implementation
 
-### 2.1 - Bug Fix Patch (2021-07-07)
-- Fixed stat parsing issues (both languages)
-
-### 3.1 - Powershell Build (2021-07-08)
-- Added PowerShell Implementation
-- Fixed bugs in JavaScript Implementation
+### 1.0 - JavaScript Build (2021-06-17)
+- Added JavaScript Implementation
 
 ### Problems or improvements
 If you have any suggested fixes or improvements for this project, please 
