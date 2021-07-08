@@ -24,6 +24,10 @@ A list of future planned changes are listed below.
 ### 2.1 - Bug Fix Patch (2021-07-07)
 - Fixed stat parsing issues (both languages)
 
+### 3.1 - Powershell Build (2021-07-08)
+- Added PowerShell Implementation
+- Fixed bugs in JavaScript Implementation
+
 ### Problems or improvements
 If you have any suggested fixes or improvements for this project, please 
 feel free to open an issue [here](issues).
