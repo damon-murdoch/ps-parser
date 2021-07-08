@@ -1,6 +1,6 @@
 # ps-parser
 ## Pokemon Showdown! Set Format Parser
-### Created by Damon Murdoch
+### Developed by Damon Murdoch ([@SirScrubbington](https://twitter.com/SirScrubbington))
 
 ## Description
 This is a repository for parsers for Pokemon Showdown! Set files, written for several different languages.  The intention of this is for the files to be able to be dropped into and used by any project. Currently only the JavaScript version has been implemented, however it is intended for other languages to be added in the future. 
