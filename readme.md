@@ -8,10 +8,11 @@ This is a repository for parsers for Pokemon Showdown! Set files, written for se
 ## Future Changes
 A list of future planned changes are listed below.
 
-| Change Description        | Priority |
-| ------------------------- | -------- | 
-| Java Implementation       | Medium   |
-| C/C++ Implementation      | Medium   |
+| Change Description                       | Priority |
+| ---------------------------------------- | -------- | 
+| Implement Go/Python from-json converters | High     |
+| Java Implementation                      | Low      |
+| C/C++ Implementation                     | Low      |
 
 ## Changelog
 ### 3.1 - Powershell Build (2021-07-08) (Current Build)
