@@ -1,0 +1,60 @@
+<!doctype html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <title>
+          Pokemon Showdown! to JSON Converter
+        </title>
+        <link rel='stylesheet' href='redist/bootstrap.min.css'>
+    </head>
+    <body class='text-light bg-dark'>
+        <div id='head' class='text-center'>
+            <p class='h1' id='title'>
+                PTCGO to JSON Converter
+            </p>
+            <p class='h3' id='subtitle'>
+                Bi-directional converter for Pokemon Showdown! text and JSON data formats.
+            </p>
+            <p class='h4 text-secondary' id='author'>
+                Created by 
+                <a href='https://twitter.com/SirScrubbington'>
+                    SirScrubbington
+                </a>
+            </p>
+        </div>
+        <div class='text-center'>
+            <label for='_spaces'>
+                Number of spaces (Output JSON)
+            </label>
+            <input id='_spaces' class='input-sm col-xs-2' type='number' value='0' min='0'>    
+        </div>
+        <!-- Input / Output Forms -->
+        <label for='_input'>
+            Input (Program will auto-detect format)
+        </label>
+        <textarea class='form-control' id='_input' rows = 8></textarea>
+
+        <label for='_output'>
+            Export
+        </label>
+        <textarea class='form-control' id='_output' rows = 8></textarea>
+        <div class='text-center'>
+            <button id='_convert' class='mt-2 btn btn-primary' onClick='convert()'>
+                Convert!
+            </button>
+        </div>
+    </body>
+    <div id='script'>
+        <!-- Bootstrap Source File -->
+        <script type='text/javascript' src='redist/bootstrap.min.js'>
+        </script>
+
+        <!-- Conversion Algorithm -->
+        <script type='text/javascript' src='javascript/parser.js'>
+        </script>
+
+        <!-- Main Source File -->
+        <script type='text/javascript' src='index.js'>
+        </script>
+    </div>
+</html>

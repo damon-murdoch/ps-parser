@@ -243,7 +243,154 @@ function parseSets(str)
   return sets;
 }
 
-// Remove this for use outside of nodejs
+// parseStatsJson(stats: Object, ivs: Boolean): String
+// Given a stats object and a switch on if the stats are
+// ivs or evs, parses the stats and returns a string object
+// for exporting.
+function parseStatJson(stats, ivs = False)
+{
+  // Pretty text for each key
+  
+  text = {
+    'hp': 'HP', 
+    'atk': 'Atk', 
+    'def': 'Def', 
+    'spa': 'SpA', 
+    'spd': 'SpD', 
+    'spe': 'Spe', 
+  }
+
+  // List of stats
+  // Will be joined on '/'
+  let list = []
+
+  // Loop over that stat keys
+  for (let key in stats)
+  {
+    // Get the stat value
+    let val = stats[key];
+
+    // If ivs is set, ensure the value is not 31 (default)
+    // If ivs is not set, ensure it is not 0 (default)
+    if (!((ivs && val === 31) || ((!ivs) && val === 0)))
+    {
+      // Add it to the list
+      list.push(val + ' ' + text[key])
+    }
+  }
+
+  // Return list joined on slashes
+  return list.join(' / ')
+}
+
+// Loops over the sets, 
+// converting them back
+// to showdown export format
+function parseJson(sets)
+{
+  // List of sets to return
+  // Will be joined before returning
+  list = [];
+
+  // Loop over the sets
+  for (let set of sets)
+  {
+    // Lines for the item
+    // Will be joined before appending
+    let item = []
+
+    // Nickname (Species) @ Item
+    let row_name = '';
+
+    // If a nickname is set
+    if (set.nickname)
+    {
+      // Add the nickname and species to the export
+      row_name = set.nickname + ' (' + set.species + ')';
+    }
+    else // Nickname not set
+    {
+      // Add the nickname to the export
+      row_name = set.species;
+    }
+
+    // If an item is set
+    if (set.item)
+    {
+      // Add the item to the set
+      row_name += ' @ ' + set.item
+    }
+
+    // Add the name row to the items list
+    item.push(row_name)
+
+    // Ability: ability
+
+    // If an ability is set
+    if (set.ability)
+    {
+      // Add the ability row to the items list
+      item.push("Ability: " + set.ability)
+    }
+
+    // Get stat string for ivs, ivs switch true
+    let ivs_str = parseStatJson(set.ivs, true);
+
+    // ivs string not empty
+    if (ivs_str)
+    {
+      // Add to item list
+      item.push("IVs: " + ivs_str)
+    }
+
+    // Get stat string for evs, ivs switch false
+    let evs_str = parseStatJson(set.evs, false);
+
+    // evs string not empty
+    if (evs_str)
+    {
+      // Add to item list
+      item.push("EVs: " + evs_str)
+    }
+
+    // Loop over the misc. attributes
+    for(let key in set.other)
+    {
+      // Get the value of the attribute
+      val = set.other[key]
+
+      // Convert the first letter of the key to upper case
+      let upper = key.substring(0, 1).toUpperCase() + key.substring(1, key.length);
+
+      // Add the key, value to the set
+      item.push(upper + ': ' + val);
+    }
+
+    // If nature is specified
+    if (set.nature)
+    {
+      // Add the nature to the form
+      item.push(set.nature + ' nature');
+    }
+
+    // Loop over the moves
+    for (let move of set.moves)
+    {
+      // Add the move to the item
+      item.push('- ' + move);
+    }
+
+    // Add the item to the list, joined on newlines
+    list.push(item.join("\n"));
+  }
+
+  // Return the list, joined on double newline
+  return list.join("\n\n");
+}
+
+// Add this for use in nodejs
+
+/*
 
 module.exports = {
   statTemplate: statTemplate,
@@ -251,3 +398,5 @@ module.exports = {
   parseStats: parseStats, 
   parseSets: parseSets
 }
+
+*/
