@@ -97,7 +97,7 @@ function ConvertFrom-StatString
   Return $Stats;
 }
 
-# parseSet(str: string): object
+# ConvertFrom-ShowdownString(str: string): object
 # Given a string sequence containing
 # Pokemon showdown sets, returns a json
 # list  of the sets converted to objects.
@@ -105,7 +105,7 @@ Function ConvertFrom-ShowdownString
 {
   Param(
     # Input string which will be converted to a hash table
-    [Alias()][Parameter(Mandatory=$True)]$InputString
+    [Alias()][Parameter(Mandatory=$True)][String[]]$InputString
   );
 
   # Empty array of sets
@@ -117,6 +117,32 @@ Function ConvertFrom-ShowdownString
   # Loop over each line in the string
   Foreach($Line in $InputString.Split("`n"))
   {
+    # If the line contains the 'ability:' text
+    If ($Line.ToLower().Contains('ability:'))
+    {
+      # Set the ability to the ability pulled from the text
+      $Current.ability = $Line.Split(':')[1].Trim();
+    }
+    
+    # If the line contains the 'evs:' text
+    ElseIf ($Line.ToLower().Contains('evs:'))
+    {
+      # Parse the evs string from the line
+      $Li = $Line.Split(':')[1].Trim();
+
+      # Get the evs object from the evs string
+      $Current.evs = ConvertFrom-StatString -Stats $Current.evs -String $Li;
+    }
+
+    # If the line contains the 'ivs:' text
+    ElseIf ($Line.ToLower().Contains('ivs:'))
+    {
+      # Parse the evs string from the line
+      $Li = $Line.Split(':')[1].Trim();
+
+      # Get the evs object from the evs string
+      $Current.ivs = ConvertFrom-StatString -Stats $Current.ivs -String $Li;
+    }
 
     # Series of increasingly obscure cases 
     # Check if this is the first line of the pokemon
@@ -126,7 +152,7 @@ Function ConvertFrom-ShowdownString
     # Case 3: No Item: Nickname (Species) (Gender)
     # Case 4: Full: Nickname (Species) (Gender) @ Item
 
-    If ($Line.Contains('@') -Or # Will always trigger if item is specified
+    ElseIf ($Line.Contains('@') -Or # Will always trigger if item is specified
         $Line.Contains('(') -Or ( # Will always trigger if gender / nn is specified
           $Line.Trim() -Ne '' -And # Blocks if string is empty
           $Line.Trim().Split(' ').Length -Eq 1) # Handles when ONLY species is specified
@@ -206,33 +232,6 @@ Function ConvertFrom-ShowdownString
         }
       }
     }
-    
-    # If the line contains the 'ability:' text
-    ElseIf ($Line.ToLower().Contains('ability:'))
-    {
-      # Set the ability to the ability pulled from the text
-      $Current.ability = $Line.Split(':')[1].Trim();
-    }
-    
-    # If the line contains the 'evs:' text
-    ElseIf ($Line.ToLower().Contains('evs:'))
-    {
-      # Parse the evs string from the line
-      $Li = $Line.Split(':')[1].Trim();
-
-      # Get the evs object from the evs string
-      $Current.evs = ConvertFrom-StatString -Stats $Current.evs -String $Li;
-    }
-
-    # If the line contains the 'ivs:' text
-    ElseIf ($Line.ToLower().Contains('ivs:'))
-    {
-      # Parse the evs string from the line
-      $Li = $Line.Split(':')[1].Trim();
-
-      # Get the evs object from the evs string
-      $Current.ivs = ConvertFrom-StatString -Stats $Current.ivs -String $Li;
-    }
 
     # All other random arbitrary k/v pairs, add to the other property
     ElseIf ($Line.Contains(':'))
@@ -266,4 +265,106 @@ Function ConvertFrom-ShowdownString
 
   # Return all of the parsed sets
   Return $Sets;
+}
+
+# ConvertFrom-ShowdownLibrary(str: string): object
+# Given a string sequence containing
+# Pokemon showdown teams, returns a json
+# list  of the teams converted to a full 
+# library seperated with formats, folders and teams.
+Function ConvertFrom-ShowdownLibrary
+{
+  Param(
+    # Input string which will be converted to a hash table
+    [Alias()][Parameter(Mandatory=$True)]$InputString
+  );
+
+  # === [gen3doublesou] vgc2003 / Latias Setup ===
+
+  # Empty hashtable of formats
+  $Library = @{};
+
+  # LIBRARY LEVELS:
+  # 1. Format
+  # 2. Folder
+  # 3. Team
+
+  # Start / end line for team
+  $LineStart = $Null;
+  $LineEnd = $Null;
+
+  # Team Name, Team Format, Team Folder (Empty Default)
+  $Name = $Null; $Format = $Null; $Folder = $Null;
+
+  # Current line number
+  $LineNo = 0;
+
+  # Loop over lines in the library
+  ForEach($Line in $InputString)
+  {
+    # If the line is a team name
+    If ($Line.Contains('==='))
+    {
+      # If the team is not null
+      If ($Null -Ne $LineStart)
+      {
+        # Ending line is the line before this one
+        $LineEnd = $LineNo - 1
+
+        # If the format is NOT already in the library
+        If (-Not $Library.ContainsKey($Format))
+        {
+          # Add the format to the library
+          $Library[$Format] = @{};
+        }
+
+        # If the folder is NOT already in the format
+        If (-Not $Library[$Format].ContainsKey($Folder))
+        {
+          # Create an array list for the teams in the format folder
+          $Library[$Format][$Folder] = [System.Collections.ArrayList]@();
+        }
+
+        # Set the library index for the format, folder and name to the converted team object between the start and end lines
+        $Library[$Format][$Folder] += @{
+          'name' = $Name; # Name of the team
+          'sets' = ConvertFrom-ShowdownString -InputString ($InputString[$LineStart..$LineEnd] -Join "`n"); # Showdown Sets
+        }
+      }
+
+      # Starting line is the line after this one
+      $LineStart = $LineNo + 1;
+
+      # Team format
+      $Format = $Line.Split("[")[1].Split("]")[0].Trim();
+
+      # Team folder
+
+      # If the line contains the forward slash
+
+      # Is in a manually created folder
+      If ($Line.Contains("/"))
+      {
+        # Generate the manually created folder string (to lower case)
+        $Folder = $Line.Split("]")[1].Split("/")[0].Trim().ToLower();
+        
+        # Team Name (to lower case)
+        $Name = $Line.Split("/")[1].Split("=")[0].Trim().ToLower();
+      }
+      Else # No folder
+      {
+        # Default folder
+        $Folder = 'default';
+
+        # Team Name (to lower case)
+        $Name = $Line.Split("]")[1].Split("=")[0].Trim().ToLower();
+      }
+    }
+
+    # Increment the line number
+    $LineNo++;
+  }
+
+  # Return the library
+  Return $Library;
 }

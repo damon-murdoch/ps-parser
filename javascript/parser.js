@@ -310,7 +310,7 @@ function parseJson(sets)
     }
     else // Nickname not set
     {
-      // Add the nickname to the export
+      // Add just the species to the export
       row_name = set.species;
     }
 
