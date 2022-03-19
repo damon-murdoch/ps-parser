@@ -107,7 +107,30 @@ function parseSets(str)
     // Case 3: No Item: Nickname (Species) (Gender)
     // Case 4: Full: Nickname (Species) (Gender) @ Item
 
-    if (line.includes('@') || // Will always trigger if item is specified
+
+    // If the line contains the 'ability:' text
+    if (line.toLowerCase().includes('ability:'))
+    {
+      // Set the ability to the ability pulled from the text
+      current.ability = line.split(':')[1].trim();
+    }
+    
+    // If the line  contains the 'evs:' text
+    else if (line.toLowerCase().includes('evs:'))
+    {
+      // Parse the stats from the text, set it to the current
+      current.evs = parseStats(current.evs, line.split(':')[1].trim());
+    }
+
+    // If the line  contains the 'ivs:' text
+    else if (line.toLowerCase().includes('ivs:'))
+    {
+      // Parse the stats from the text, set it to the current
+      current.ivs = parseStats(current.ivs, line.split(':')[1].trim());
+    }
+
+
+    else if (line.includes('@') || // Will always trigger if item is specified
         line.includes('(') || // Will always trigger if gender / nn is specified
         (line.trim() != '' && line.trim().split(' ').length == 1)) // Will trigger if nothing is specified
     {
@@ -185,27 +208,6 @@ function parseSets(str)
           current.item = li[1].trim();
         }
       }
-    }
-
-    // If the line contains the 'ability:' text
-    else if (line.toLowerCase().includes('ability:'))
-    {
-      // Set the ability to the ability pulled from the text
-      current.ability = line.split(':')[1].trim();
-    }
-    
-    // If the line  contains the 'evs:' text
-    else if (line.toLowerCase().includes('evs:'))
-    {
-      // Parse the stats from the text, set it to the current
-      current.evs = parseStats(current.evs, line.split(':')[1].trim());
-    }
-
-    // If the line  contains the 'ivs:' text
-    else if (line.toLowerCase().includes('ivs:'))
-    {
-      // Parse the stats from the text, set it to the current
-      current.ivs = parseStats(current.ivs, line.split(':')[1].trim());
     }
 
     // All other random arbitrary k/v pairs, add to the other property
