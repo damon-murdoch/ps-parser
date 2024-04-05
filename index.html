@@ -1,66 +1,130 @@
 <!doctype html>
 <meta charset='utf-8'>
 <html>
-    <head>
-        <title>
-          Pokemon Showdown! to JSON Converter
-        </title>
-        <link rel='stylesheet' href='redist/bootstrap.min.css'>
-    </head>
-    <body class='text-light bg-dark'>
-        <div id='head' class='text-center'>
-            <p class='h1' id='title'>
-                PTCGO to JSON Converter
-            </p>
-            <p class='h3' id='subtitle'>
-                Bi-directional converter for Pokemon Showdown! text and JSON data formats.
-            </p>
-            <p class='h4 text-secondary' id='author'>
-                Created by 
-                <a href='https://twitter.com/SirScrubbington'>
-                    SirScrubbington
-                </a>
-            </p>
-            <p class='h6 text-light'>
-                This project has been implemented in other languages. View the project
-                <a class='link-light' target='_blank' href='https://github.com/damon-murdoch/ps-parser'>
-                    here.
-                </a>
-            </p>
-        </div>
-        <div class='text-center'>
-            <label for='_spaces'>
-                Number of spaces (Output JSON)
-            </label>
-            <input id='_spaces' class='input-sm col-xs-2' type='number' value='0' min='0'>    
-        </div>
-        <!-- Input / Output Forms -->
-        <label for='_input'>
-            Input (Program will auto-detect format)
-        </label>
-        <textarea class='form-control' id='_input' rows = 8></textarea>
 
-        <label for='_output'>
-            Export
-        </label>
-        <textarea class='form-control' id='_output' rows = 8></textarea>
-        <div class='text-center'>
-            <button id='_convert' class='mt-2 btn btn-primary' onClick='convert()'>
-                Convert!
-            </button>
-        </div>
-    </body>
-    <div id='script'>
-        <!-- Bootstrap Source File -->
-        <script type='text/javascript' src='redist/bootstrap.min.js'>
-        </script>
+<head>
+  <!-- Webpage Title -->
+  <title>
+    Dragapult.xyz
+  </title>
 
-        <!-- Conversion Algorithm -->
-        <script type='text/javascript' src='javascript/parser.js'>
-        </script>
+  <!-- Custom Icon -->
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
 
-        <!-- Main Source File -->
-        <script type='text/javascript' src='index.js'>
-        </script>
+  <!-- Stylesheet Source -->
+
+  <!-- latest bootstrap release -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+</head>
+
+<body id="body" class="bg-secondary" style="
+      background-image: url(img/header.png);
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    ">
+  <div style="
+        background-color: rgba(24, 24, 24, 0.8);
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        overflow: hidden;
+      ">
+    <div id="header" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!-- Navigation Bar -->
+      <div class="d-flex justify-content-center">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand text-secondary" href="https://www.dragapult.xyz">
+            <img src="img/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="icon" />
+            Dragapult.xyz
+          </a>
+          <div id="navbar" class="d-flex justify-content-center">
+            <a class="text-secondary" href="https://www.dragapult.xyz/index.html">
+              Back to Home
+            </a>
+          </div>
+        </nav>
+      </div>
     </div>
+    <div id="body" class="container bg-dark rounded overflow-auto my-2 pb-3" style="opacity: 0.8; max-height: 90vh">
+      <div id="title" class="text-light text-center">
+        <h2>
+          <!-- Main Page Title Goes Here-->
+          Pokemon Showdown! to JSON Converter
+        </h2>
+        <p class="text-secondary">
+          <!-- Minor Page Subtitle Goes Here -->
+          Bi-directional converter for Pokemon Showdown! text and JSON data formats
+        </p>
+        <div class="container-fluid">
+          <p class="text-muted lead">
+            Developed by
+            <a class="text-secondary" href="https://twitter.com/SirScrubbington">Damon Murdoch</a>
+          </p>
+          <p class='h6 text-light'>
+            This application has been implemented in other languages. View the repository
+            <a class='link-light' target='_blank' href='https://github.com/damon-murdoch/ps-parser'>
+              here.
+            </a>
+          </p>
+        </div>
+        <table class="table text-light tbl-dark">
+          <thead>
+            <tr>
+              <th>
+                Input (Auto-Detect Format)
+              </th>
+              <th>
+                Output
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <textarea class='form-control' id='_input' rows=8></textarea>
+              </td>
+              <td>
+                <textarea class='form-control' id='_output' rows=8></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="form-control input-group-text" id="">Indentation</span>
+                  </div>
+                  <input id='_spaces' class='form-control' type='number' value='0' min='0'>
+                </div>
+              </td>
+              <td style="width: 50%">
+                <button id='_convert' class='form-control btn btn-primary' onClick='convert()'>
+                  Convert!
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="foot"></div>
+    <div id='script'>
+      <!-- Bootstrap Source File -->
+      <script type='text/javascript' src='redist/bootstrap.min.js'>
+      </script>
+
+      <!-- Conversion Algorithm -->
+      <script type='text/javascript' src='javascript/parser.js'>
+      </script>
+
+      <!-- Main Source File -->
+      <script type='text/javascript' src='index.js'>
+      </script>
+    </div>
+  </div>
+</body>
+
 </html>
